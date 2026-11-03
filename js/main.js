@@ -1,3 +1,4 @@
+import './navigation.js';
 import './contact.js';
 import './project-dialog.js';
 import './motion.js';

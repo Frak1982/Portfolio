@@ -34,7 +34,7 @@ test('email links offer webmail and copying before attempting to open a mail app
   await expect(trigger).toBeFocused();
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   await page.locator('.header').getByRole('link', { name: 'Contattami' }).click();
-  await expect(page).toHaveURL(/#contatti$/);
+  await expect(page).toHaveURL('http://127.0.0.1:4173/');
   await expect(dialog).not.toBeVisible();
   await expect(page.locator('#contatti h2')).toBeInViewport();
   await trigger.click();
