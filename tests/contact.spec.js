@@ -1,10 +1,17 @@
 import { test, expect } from '@playwright/test';
+async function fillContact(page) {
+  await page.locator('#sender-name').fill('Mario Rossi');
+  await page.locator('#sender-email').fill('mario@example.it');
+  await page.locator('#sender-message').fill('Vorrei parlare di un progetto.');
+  await page.locator('#privacy-consent').check();
+}
 
 test('email links offer webmail and copying before attempting to open a mail app', async ({
   page,
 }) => {
   await page.goto('/');
-  const trigger = page.getByRole('link', { name: "Invia un'email" });
+  await fillContact(page);
+  const trigger = page.getByRole('button', { name: 'Invia email', exact: true });
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Come vuoi scrivermi?' });
   await expect(dialog).toBeVisible();
@@ -18,9 +25,9 @@ test('email links offer webmail and copying before attempting to open a mail app
   );
   await expect(dialog.getByRole('link', { name: "Apri l'app email" })).toHaveAttribute(
     'href',
-    'mailto:fraraci82@gmail.com',
+    /^mailto:fraraci82@gmail\.com\?subject=/,
   );
-  await expect(dialog.getByRole('button', { name: 'Copia indirizzo email' })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Copia messaggio' })).toBeVisible();
   await expect(page).toHaveURL('http://127.0.0.1:4173/');
   await page.keyboard.press('Escape');
   await expect(dialog).not.toBeVisible();
@@ -54,10 +61,10 @@ test('prepared draft preserves text and can be copied without an email applicati
   await page.locator('#sender-name').fill('Mario Rossi');
   await page.locator('#sender-email').fill('mario+portfolio@example.it');
   await page.locator('#sender-message').fill(message);
-  await page.getByRole('button', { name: 'Prepara il messaggio' }).click();
+  await page.getByRole('button', { name: 'Invia email', exact: true }).click();
   await expect(page.locator('#email-dialog')).not.toBeVisible();
   await page.locator('#privacy-consent').check();
-  await page.getByRole('button', { name: 'Prepara il messaggio' }).click();
+  await page.getByRole('button', { name: 'Invia email', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Come vuoi scrivermi?' });
   await expect(dialog).toBeVisible();
   const gmail = new URL(await page.locator('#email-gmail').getAttribute('href'));
@@ -73,8 +80,9 @@ test('prepared draft preserves text and can be copied without an email applicati
   expect(await page.evaluate(() => window.copiedEmail)).toContain(message);
   await page.keyboard.press('Escape');
   await expect(page.locator('#sender-message')).toHaveValue(message);
-  await page.getByRole('link', { name: "Invia un'email" }).click();
-  await expect(page.locator('#email-preview')).toHaveValue('fraraci82@gmail.com');
+  await page.getByRole('button', { name: 'Invia email', exact: true }).click();
+  await expect(page.locator('#email-preview')).toHaveValue(new RegExp('Nome: Mario Rossi'));
+  expect(await page.locator('#email-preview').inputValue()).toContain(message);
 });
 
 test('denied clipboard access offers selectable text and stays usable on a small screen', async ({
@@ -92,15 +100,16 @@ test('denied clipboard access offers selectable text and stays usable on a small
   });
   await page.setViewportSize({ width: 320, height: 640 });
   await page.goto('/');
-  await page.getByRole('link', { name: "Invia un'email" }).click();
+  await fillContact(page);
+  await page.getByRole('button', { name: 'Invia email', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Come vuoi scrivermi?' });
-  await dialog.getByRole('button', { name: 'Copia indirizzo email' }).click();
+  await dialog.getByRole('button', { name: 'Copia messaggio' }).click();
   const preview = dialog.getByRole('textbox', { name: 'Testo da copiare' });
   await expect(preview).toBeVisible();
   await expect(preview).toBeFocused();
   expect(
     await preview.evaluate((input) => input.value.slice(input.selectionStart, input.selectionEnd)),
-  ).toBe('fraraci82@gmail.com');
+  ).toBe(await preview.inputValue());
   await expect(dialog.getByRole('status')).toContainText('Testo selezionato');
   expect(await dialog.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
   const bounds = await dialog.boundingBox();

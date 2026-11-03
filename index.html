@@ -103,7 +103,10 @@
           <a href="#competenze">Competenze</a><a href="#progetti">Progetti</a>
           <a href="#chi-sono">Chi sono</a><a href="#contatti">Contatti</a>
         </nav>
-        <a class="btn" href="#contatti">✉ Contattami</a>
+        <a class="btn" href="#contatti"
+          ><img class="btn-icon" src="./assets/icons/mail.svg" alt="" width="22" height="22" />
+          Contattami</a
+        >
       </div>
     </header>
     <main id="main-content" tabindex="-1">
@@ -133,7 +136,16 @@
                 download="CV_Francesco_Raciti_2026.pdf"
                 href="./assets/francesco-raciti-cv.pdf"
                 >↓ Scarica il CV</a
-              ><a class="btn" href="#contatti">✉ Contattami</a>
+              ><a class="btn" href="#contatti"
+                ><img
+                  class="btn-icon"
+                  src="./assets/icons/mail.svg"
+                  alt=""
+                  width="22"
+                  height="22"
+                />
+                Contattami</a
+              >
             </div>
             <div class="features">
               <span>Applicazioni web</span><span>Interfacce moderne</span
@@ -666,20 +678,8 @@
             Cerchi un Front-End Developer Angular per il tuo team o vuoi realizzare un sito web?
             Scrivimi per parlare di lavoro dipendente, collaborazioni e nuovi progetti web.
           </p>
-          <div class="contact-tools">
-            <div class="contact-mail">
-              <span>Email professionale</span><strong id="email-address">fraraci82@gmail.com</strong
-              ><button
-                aria-live="polite"
-                hidden
-                class="btn copy-email"
-                id="copy-email"
-                type="button"
-              >
-                ⧉ Copia email
-              </button>
-            </div>
-            <form class="contact-form" id="contact-form" hidden>
+          <form class="contact-form" id="contact-form" data-recipient="fraraci82@gmail.com" hidden>
+            <div class="form-field">
               <label for="sender-name">Il tuo nome</label
               ><input
                 autocomplete="name"
@@ -688,7 +688,10 @@
                 name="name"
                 placeholder="Come ti chiami?"
                 required=""
-              /><label for="sender-email">La tua email</label
+              />
+            </div>
+            <div class="form-field">
+              <label for="sender-email">La tua email</label
               ><input
                 autocomplete="email"
                 id="sender-email"
@@ -697,7 +700,10 @@
                 placeholder="nome@esempio.it"
                 required=""
                 type="email"
-              /><label for="sender-message">Descrivi l'opportunità o il progetto</label
+              />
+            </div>
+            <div class="form-field form-field-wide">
+              <label for="sender-message">Descrivi l'opportunità o il progetto</label
               ><textarea
                 id="sender-message"
                 maxlength="3000"
@@ -706,39 +712,26 @@
                 required=""
                 rows="4"
               ></textarea>
-              <div class="consent-row">
-                <input
-                  id="privacy-consent"
-                  name="privacy-consent"
-                  required=""
-                  type="checkbox"
-                /><label for="privacy-consent">
-                  Ho letto l'<a href="./privacy.html">informativa privacy</a> e acconsento al
-                  trattamento dei dati per ricevere risposta alla mia richiesta.
-                </label>
-              </div>
-              <button class="btn main" type="submit">✉ Prepara il messaggio</button>
-              <p class="form-note">
-                Scegli se aprire il messaggio nella tua app email, in Gmail o in Outlook, oppure
-                copiarlo. L'invio va confermato nella tua posta.
-              </p>
-            </form>
-          </div>
-          <div class="actions">
-            <a class="btn main" href="mailto:fraraci82@gmail.com">✉ Invia un'email</a
-            ><a
-              class="btn"
-              download="CV_Francesco_Raciti_2026.pdf"
-              href="./assets/francesco-raciti-cv.pdf"
-              >↓ Scarica il CV</a
-            ><a
-              class="btn"
-              href="https://www.linkedin.com/in/francescoraciti"
-              rel="noopener noreferrer"
-              target="_blank"
-              >LinkedIn ↗</a
-            >
-          </div>
+            </div>
+            <div class="consent-row">
+              <input
+                id="privacy-consent"
+                name="privacy-consent"
+                required=""
+                type="checkbox"
+              /><label for="privacy-consent">
+                Ho letto l'<a href="./privacy.html">informativa privacy</a> e acconsento al
+                trattamento dei dati per ricevere risposta alla mia richiesta.
+              </label>
+            </div>
+            <button class="btn main" type="submit">
+              <img class="btn-icon" src="./assets/icons/mail.svg" alt="" width="22" height="22" />
+              Invia email
+            </button>
+          </form>
+          <noscript
+            ><p><a class="btn main" href="mailto:fraraci82@gmail.com">Invia email</a></p></noscript
+          >
         </div>
       </section>
       <dialog
@@ -761,7 +754,7 @@
             >Apri Outlook ↗</a
           >
           <a class="btn" id="email-app" data-email-app>Apri l'app email</a>
-          <button class="btn" id="copy-email-message" type="button">Copia indirizzo email</button>
+          <button class="btn" id="copy-email-message" type="button">Copia messaggio</button>
         </div>
         <p class="email-help">
           Se l'app non si apre, scegli Gmail o Outlook. Puoi anche copiare il messaggio per usarlo

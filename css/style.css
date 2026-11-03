@@ -156,6 +156,12 @@ section[id] {
   transform: translateX(-120%);
   transition: transform 0.7s;
 }
+.btn-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+}
 .btn:hover::after {
   transform: translateX(120%);
 }
@@ -637,31 +643,6 @@ footer {
   color: #a3b3ca;
   font-size: 12px;
 }
-.contact-tools {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 26px;
-  margin: 27px 0 20px;
-}
-.contact-mail {
-  padding: 20px;
-  border-radius: 13px;
-  border: 1px solid #394b82;
-  background: #080e27;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 13px;
-  min-width: 0;
-}
-.contact-mail span {
-  font-size: 12px;
-  color: #b7c4dc;
-}
-.contact-mail strong {
-  font-size: clamp(13px, 1.5vw, 17px);
-  overflow-wrap: anywhere;
-}
 .email-dialog {
   max-height: calc(100dvh - 32px);
   overflow-y: auto;
@@ -715,8 +696,20 @@ footer {
 }
 .contact-form {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  min-width: 0;
+  margin-top: 26px;
+}
+.form-field {
+  display: grid;
   gap: 9px;
   min-width: 0;
+}
+.form-field-wide,
+.contact-form .consent-row,
+.contact-form button {
+  grid-column: 1 / -1;
 }
 .contact-form label {
   font-size: 13px;
@@ -742,12 +735,6 @@ footer {
   justify-self: start;
   margin-top: 6px;
 }
-.contact-form .form-note {
-  font-size: 12px;
-  line-height: 1.5;
-  margin: 2px 0 0;
-  color: #b9c7e0;
-} /* Animazioni decorative della hero */
 .contact-form .consent-row {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -1113,11 +1100,8 @@ footer {
   .experience-grid {
     grid-template-columns: 1fr;
   }
-  .contact-tools {
+  .contact-form {
     grid-template-columns: 1fr;
-  }
-  .contact-mail {
-    gap: 11px;
   }
 }
 @media (max-width: 650px) {

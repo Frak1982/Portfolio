@@ -28,7 +28,7 @@ test('contact form requires privacy consent and the privacy page is available', 
   await page.locator('#sender-name').fill('Mario Rossi');
   await page.locator('#sender-email').fill('mario@example.it');
   await page.locator('#sender-message').fill('Vorrei parlare di un progetto.');
-  await page.getByRole('button', { name: 'Prepara il messaggio' }).click();
+  await page.getByRole('button', { name: 'Invia email', exact: true }).click();
   await expect(page.locator('#privacy-consent')).not.toBeChecked();
   expect(
     await page.locator('#privacy-consent').evaluate((input) => input.validity.valueMissing),
@@ -127,7 +127,7 @@ test('content and direct contact links remain available without JavaScript', asy
     await expect(section).toHaveCSS('opacity', '1');
   }
   await expect(page.locator('#contact-form')).toBeHidden();
-  await expect(page.getByRole('link', { name: "Invia un'email" })).toHaveAttribute(
+  await expect(page.getByRole('link', { name: 'Invia email' })).toHaveAttribute(
     'href',
     'mailto:fraraci82@gmail.com',
   );
@@ -145,7 +145,7 @@ test('reduced motion renders static editors and rejects whitespace-only contact 
   await page.locator('#sender-name').fill('   ');
   await page.locator('#sender-email').fill('test@example.com');
   await page.locator('#sender-message').fill('   ');
-  await page.getByRole('button', { name: 'Prepara il messaggio' }).click();
+  await page.getByRole('button', { name: 'Invia email', exact: true }).click();
   expect(await page.locator('#sender-name').evaluate((input) => input.validity.customError)).toBe(
     true,
   );
