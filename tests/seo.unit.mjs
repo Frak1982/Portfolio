@@ -16,7 +16,8 @@ test('public URL is consistent across canonical, social metadata, schema, robots
   assert.ok(result.head.includes(`"@id": "${publicUrl}#person"`));
   assert.ok(result.robots.includes(`Sitemap: ${publicUrl}sitemap.xml`));
   assert.ok(result.sitemap.includes(`<loc>${publicUrl}</loc>`));
-  assert.equal((result.sitemap.match(/<loc>/g) || []).length, 1);
+  assert.equal((result.sitemap.match(/<loc>/g) || []).length, 2);
+  assert.ok(result.sitemap.includes(`<loc>${publicUrl}privacy.html</loc>`));
   assert.ok(!result.sitemap.includes('<lastmod>'));
 });
 

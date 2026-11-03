@@ -99,11 +99,11 @@
           ><b>FR</b><span>Francesco Raciti<small>Front-End Developer</small></span></a
         >
         <nav aria-label="Navigazione principale" class="navlinks">
-          <a href="#home">Home</a><a href="#chi-sono">Chi sono</a
-          ><a href="#competenze">Competenze</a><a href="#progetti">Progetti</a
-          ><a href="#contatti">Contatti</a>
+          <a href="#home">Home</a><a href="#esperienza">Esperienza</a>
+          <a href="#competenze">Competenze</a><a href="#progetti">Progetti</a>
+          <a href="#chi-sono">Chi sono</a><a href="#contatti">Contatti</a>
         </nav>
-        <a class="btn" href="mailto:fraraci82@gmail.com">✉ Contattami</a>
+        <a class="btn" href="#contatti">✉ Contattami</a>
       </div>
     </header>
     <main id="main-content" tabindex="-1">
@@ -122,9 +122,9 @@
             <div class="kicker">FRANCESCO RACITI · SVILUPPATORE ANGULAR A PADOVA</div>
             <h1>Trasformo idee<br />in <span class="grad">esperienze digitali</span></h1>
             <p>
-              Sono Francesco Raciti, sviluppatore front-end a Padova. Sviluppo applicazioni web
-              moderne, intuitive e performanti con Angular, TypeScript e RxJS. Integro strumenti di
-              intelligenza artificiale per creare soluzioni efficienti e scalabili.
+              Sono Francesco Raciti, sviluppatore front-end a Padova. Dal 2022 sviluppo e mantengo
+              applicazioni web con Angular, TypeScript e RxJS, lavorando su interfacce responsive,
+              gestione dei dati e integrazione con i servizi backend.
             </p>
             <div class="actions">
               <a class="btn main" href="#progetti">➤ Scopri i miei progetti</a
@@ -144,16 +144,53 @@
       </section>
       <div class="wrap">
         <div class="stats glass">
-          <div><strong>4+ anni</strong><small>Esperienza front-end</small></div>
+          <div><strong>Dal 2022</strong><small>Esperienza front-end</small></div>
           <div><strong>Angular</strong><small>Applicazioni web</small></div>
           <div><strong>Padova</strong><small>Italia · Remoto</small></div>
           <div><strong>AI</strong><small>Sviluppo assistito</small></div>
         </div>
       </div>
+      <section class="section wrap reveal" id="esperienza">
+        <div class="kicker">ESPERIENZA PROFESSIONALE</div>
+        <h2>Il front-end nel lavoro di ogni giorno</h2>
+        <div class="experience-grid">
+          <article class="experience-card">
+            <div class="experience-meta">
+              <span>Si Media S.r.l. · Treviso</span>
+              <span><time datetime="2022-11">Novembre 2022</time> – presente</span>
+            </div>
+            <h3>Front-End Developer</h3>
+            <p>
+              Sviluppo e manutenzione di applicazioni web con Angular e TypeScript, collaborando con
+              il team backend per integrare dati e funzionalità.
+            </p>
+            <ul>
+              <li>Componenti e interfacce responsive con Angular Material e Bootstrap.</li>
+              <li>Flussi asincroni con RxJS e gestione dello stato applicativo con Signals.</li>
+              <li>Integrazione di API REST e gestione degli errori applicativi.</li>
+              <li>Analisi, debugging e versionamento del codice con Git.</li>
+            </ul>
+          </article>
+          <aside class="education-card" aria-labelledby="education-title">
+            <div class="kicker">FORMAZIONE</div>
+            <h3 id="education-title">Le basi del mio percorso</h3>
+            <dl>
+              <dt>Web Developer</dt>
+              <dd>Mind Academy · Padova</dd>
+              <dt>Perito Informatico</dt>
+              <dd>ITIS Galileo Ferraris · Acireale</dd>
+            </dl>
+            <p>
+              Continuo ad approfondire lo sviluppo web e l'uso di strumenti di intelligenza
+              artificiale a supporto del lavoro sul codice.
+            </p>
+          </aside>
+        </div>
+      </section>
       <section class="section wrap reveal" id="competenze">
         <div class="kicker">LE MIE COMPETENZE</div>
         <h2>Competenze Angular e tecnologie front-end</h2>
-        <p>Un insieme di strumenti per creare soluzioni moderne e scalabili.</p>
+        <p>Le tecnologie che utilizzo nello sviluppo di interfacce e applicazioni web.</p>
         <div class="skills">
           <div class="skill">
             <span class="skill-icon" aria-hidden="true"
@@ -296,13 +333,14 @@
             >AI Tools
           </div>
         </div>
+        <p class="learning-note">
+          <strong>Formazione continua:</strong> approfondisco NgRx e sviluppo backend, partendo da
+          conoscenze di base in C# e SQL.
+        </p>
       </section>
       <section class="section wrap reveal" id="progetti">
-        <div class="kicker">PROGETTI SELEZIONATI</div>
+        <div class="kicker">PROGETTI REALIZZATI</div>
         <h2>Dal codice alle esperienze</h2>
-        <p>
-          Un progetto pubblicato, un prototipo interattivo in sviluppo e nuove idee in preparazione.
-        </p>
         <div class="project-grid">
           <article class="project-card">
             <div class="project-art art-triskele">
@@ -315,11 +353,15 @@
             </div>
             <div class="project-body">
               <div class="project-meta">
-                <span class="tag">Angular</span><span class="tag">AI-assisted</span
-                ><span class="status live">● Online</span>
+                <span class="tag">Angular</span><span class="tag">HTML</span>
+                <span class="tag">CSS</span><span class="tag">TypeScript</span>
+                <span class="tag">AI-assisted</span><span class="status live">● Online</span>
               </div>
               <h3>Triskele Gastronomie</h3>
-              <p>Sito web realizzato con Angular e strumenti AI a supporto dello sviluppo.</p>
+              <p>
+                Sito vetrina di una gastronomia italo-siciliana a Rennes, con specialità, menu e
+                informazioni per visitare il locale.
+              </p>
               <div class="project-actions">
                 <a
                   class="btn main"
@@ -328,7 +370,45 @@
                   target="_blank"
                   >Visita il sito ↗</a
                 ><button type="button" hidden class="btn detail-btn" data-project="triskele">
-                  Dettagli tecnici
+                  Scopri il progetto
+                </button>
+              </div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-elios">
+              <img
+                alt="Anteprima del sito Elios Servizi, dedicato al fotovoltaico per abitazioni e imprese"
+                loading="lazy"
+                width="1440"
+                height="900"
+                class="project-preview"
+                src="./assets/elios-servizi-preview.jpg"
+              />
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="tag">HTML</span><span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">AI-assisted</span>
+                <span class="status live">● Online</span>
+              </div>
+              <h3>Elios Servizi</h3>
+              <p>
+                Sito aziendale di Elios Servizi, dedicato al fotovoltaico e alle soluzioni
+                energetiche per abitazioni e imprese.
+              </p>
+              <div class="project-actions">
+                <a
+                  class="btn main"
+                  href="https://eliosservizi.it/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Visita il sito ↗
+                </a>
+                <button type="button" hidden class="btn detail-btn" data-project="elios">
+                  Scopri il progetto
                 </button>
               </div>
             </div>
@@ -370,7 +450,7 @@
                 ></path>
                 <rect
                   fill="#2b689f"
-                  height="16"
+                  height="12"
                   rx="5"
                   stroke="#5bd7ff"
                   width="56"
@@ -381,7 +461,7 @@
                 <rect fill="#245582" height="9" rx="3" width="51" x="44" y="58"></rect>
                 <g class="cp-ramp">
                   <path
-                    d="M111 122 L211 83"
+                    d="M108 72 L178 100"
                     filter="url(#cp-glow)"
                     opacity=".18"
                     stroke="#29d5ff"
@@ -389,24 +469,23 @@
                     stroke-width="13"
                   ></path>
                   <path
-                    d="M111 122 L211 83"
+                    d="M108 72 L178 100"
                     stroke="url(#cp-ramp)"
                     stroke-linecap="round"
                     stroke-width="9"
                   ></path>
                 </g>
-                <g class="cp-bouncer">
-                  <rect fill="#9d65ff" height="12" rx="5" width="40" x="207" y="104"></rect>
+                <g class="cp-middle-ramp">
                   <path
-                    d="M215 102l10 -11 10 11"
-                    fill="none"
-                    stroke="#e7caff"
-                    stroke-width="3"
+                    d="M202 121 L244 139"
+                    stroke="#9d65ff"
+                    stroke-linecap="round"
+                    stroke-width="9"
                   ></path>
                 </g>
                 <g class="cp-platform">
                   <path
-                    d="M250 96 L282 91"
+                    d="M263 155 L282 161"
                     stroke="#63b9ff"
                     stroke-linecap="round"
                     stroke-width="9"
@@ -415,32 +494,33 @@
                 <g class="cp-portal">
                   <ellipse
                     cx="306"
-                    cy="70"
+                    cy="158"
                     fill="#8e5cff"
                     filter="url(#cp-glow)"
                     opacity=".23"
                     rx="19"
-                    ry="27"
+                    ry="21"
                   ></ellipse>
                   <ellipse
                     cx="306"
-                    cy="70"
+                    cy="158"
                     fill="#211344"
                     rx="16"
-                    ry="24"
+                    ry="19"
                     stroke="#b68cff"
                     stroke-width="5"
                   ></ellipse>
-                  <ellipse cx="306" cy="70" fill="#8c5aff" opacity=".45" rx="9" ry="16"></ellipse>
+                  <ellipse cx="306" cy="158" fill="#8c5aff" opacity=".45" rx="9" ry="13"></ellipse>
                 </g>
-                <g class="cp-ball" transform="translate(68 49)">
+                <g class="cp-ball" transform="translate(68 30)">
                   <circle fill="#2bceff" filter="url(#cp-glow)" opacity=".6" r="10"></circle>
                   <circle fill="url(#cp-ball)" r="7"></circle>
                   <animateMotion
                     calcMode="linear"
                     dur="5.5s"
-                    keyTimes="0;0.1;0.24;0.5;0.61;0.72;0.83;0.93;1"
-                    path="M0 0 L20 8 Q36 17 49 62 L127 32 Q141 27 151 46 Q159 69 168 38 Q181 22 195 33 L224 22 L238 21"
+                    keyPoints="0;0.08;0.22;0.44;0.57;0.72;0.83;0.92;1;1"
+                    keyTimes="0;0.14;0.28;0.44;0.54;0.66;0.75;0.83;0.91;1"
+                    path="M0 0 L22 0 Q32 0 40 30 L110 58 Q124 64 134 79 L176 97 Q187 102 195 113 L214 119 Q226 123 238 128"
                     repeatCount="indefinite"
                   ></animateMotion>
                 </g>
@@ -448,7 +528,8 @@
             </div>
             <div class="project-body">
               <div class="project-meta">
-                <span class="tag">Unity 6</span><span class="tag">C#</span
+                <span class="tag">Unity 6</span><span class="tag">C#</span>
+                <span class="tag">AI-assisted</span
                 ><span class="status building">● In sviluppo</span>
               </div>
               <h3>CreativePuzzle</h3>
@@ -458,28 +539,8 @@
               </p>
               <div class="project-actions">
                 <button type="button" hidden class="btn detail-btn" data-project="puzzle">
-                  Scopri il prototipo →
+                  Scopri il progetto
                 </button>
-              </div>
-            </div>
-          </article>
-          <article class="project-card">
-            <div aria-hidden="true" class="project-art art-next">
-              <div class="code-art">
-                <span>const nextProject = {</span><span>  framework: 'Angular',</span
-                ><span>  status: 'coming soon'</span><span>};</span><b>⌘</b>
-              </div>
-              <span class="art-label">IN PREPARAZIONE</span>
-            </div>
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="tag">Angular</span><span class="tag">Demo</span
-                ><span class="status building">● Prossimamente</span>
-              </div>
-              <h3>Nuove applicazioni</h3>
-              <p>Uno spazio per future demo front-end, pubblicate solo quando saranno pronte.</p>
-              <div class="project-actions">
-                <a class="btn" href="#contatti">Proponi un progetto →</a>
               </div>
             </div>
           </article>
@@ -493,26 +554,76 @@
         ><div class="kicker">PROGETTO PUBBLICATO</div>
         <h2 id="dialog-title">Triskele Gastronomie</h2>
         <p>
-          Sito web realizzato con <strong>Angular</strong>, con utilizzo di strumenti AI a supporto
-          dello sviluppo.
+          Il sito di <strong>Triskele Gastronomie</strong> presenta una gastronomia italo-siciliana
+          a Rennes, raccontandone l'identità e la passione per i sapori della cucina italiana.
         </p>
-        <p>Un esempio concreto di progetto web pubblicato.</p>
+        <p>
+          Il visitatore può conoscere la storia dell'attività, scoprire le specialità e consultare
+          il menu, disponibile anche da scaricare. Orari, contatti e indicazioni sulla posizione
+          aiutano a organizzare una visita al locale.
+        </p>
+        <h3>Il mio contributo</h3>
+        <p>
+          Ho curato la realizzazione completa del sito, costruendo la presentazione dell'attività,
+          delle specialità e delle informazioni utili ai clienti.
+        </p>
+        <h3>Il risultato</h3>
+        <p>
+          Un sito pubblicato che riunisce racconto del locale, menu e contatti in un unico punto di
+          riferimento per chi vuole conoscere Triskele o organizzare una visita.
+        </p>
         <p>
           <a href="https://triskelegastronomie.com" target="_blank" rel="noopener noreferrer"
             >Apri il sito online ↗</a
           >
         </p></template
       >
+      <template id="project-elios">
+        <div class="kicker">PROGETTO PUBBLICATO</div>
+        <h2 id="dialog-title">Elios Servizi</h2>
+        <p>
+          Sito aziendale dedicato alle soluzioni energetiche di <strong>Elios Servizi</strong>, con
+          percorsi distinti per abitazioni e imprese.
+        </p>
+        <ul>
+          <li>Presentazione dei servizi di fotovoltaico, accumulo e ricarica elettrica.</li>
+          <li>Sezioni dedicate alle esigenze residenziali e aziendali.</li>
+          <li>Percorso guidato per raccogliere le esigenze e richiedere una valutazione.</li>
+        </ul>
+        <h3>Il mio contributo</h3>
+        <p>
+          Ho curato la realizzazione completa del sito, dalla presentazione dei servizi ai percorsi
+          dedicati a casa e impresa, compresa l'interfaccia della richiesta di valutazione.
+        </p>
+        <h3>Il risultato</h3>
+        <p>
+          Un sito pubblicato che aiuta privati e aziende a orientarsi tra le soluzioni energetiche e
+          a descrivere le proprie esigenze prima di entrare in contatto con Elios.
+        </p>
+        <p>
+          <a href="https://eliosservizi.it/" target="_blank" rel="noopener noreferrer"
+            >Apri il sito online ↗</a
+          >
+        </p>
+      </template>
       <template id="project-puzzle"
         ><div class="kicker">PROTOTIPO IN SVILUPPO</div>
         <h2 id="dialog-title">CreativePuzzle</h2>
-        <p>Puzzle game mobile sviluppato con <strong>Unity 6 e C#</strong>.</p>
+        <p>
+          <strong>CreativePuzzle</strong> è un gioco puzzle per dispositivi mobili in cui il
+          giocatore costruisce un percorso per guidare una pallina fino al portale di arrivo.
+        </p>
+        <p>
+          La sfida consiste nello scegliere dove posizionare rampe e blocchi prima di avviare il
+          movimento: ogni disposizione cambia il percorso della pallina e permette di sperimentare
+          soluzioni diverse.
+        </p>
         <ul>
           <li>Obiettivo: guidare una pallina dal punto iniziale al portale.</li>
           <li>
             Posizionamento di rampe e altri elementi all’interno di una cornice sospesa nel vuoto.
           </li>
-          <li>Simulazione fisica, reset e verifica del completamento del livello.</li>
+          <li>Possibilità di riprovare il livello e modificare la disposizione degli elementi.</li>
           <li>
             Il progetto è ancora in fase di prototipazione; non è disponibile una demo pubblica.
           </li>
@@ -521,30 +632,40 @@
       <section class="section wrap about reveal" id="chi-sono">
         <div>
           <div class="kicker">CHI SONO</div>
-          <h2>Passione, esperienza e innovazione</h2>
+          <h2>Un percorso costruito sul fare</h2>
           <p>
-            Sono Francesco Raciti, Front-End Developer con esperienza professionale dal 2022. Lavoro
-            con Angular, TypeScript, RxJS, Signals, componenti standalone e integrazione di API
-            REST.
+            La mia formazione informatica e il percorso Web Developer presso Mind Academy mi hanno
+            portato a trasformare l'interesse per la tecnologia in una professione.
           </p>
           <p>
-            Utilizzo strumenti come Claude Code e agenti AI per supportare sviluppo, analisi e
-            prototipazione.
+            Prima dello sviluppo web ho lavorato nella logistica, anche come responsabile di
+            magazzino. Organizzazione, gestione delle priorità e attenzione ai problemi concreti
+            fanno parte del metodo che porto anche nel lavoro sul software.
+          </p>
+          <p>
+            Affianco al lavoro su Angular la realizzazione di siti web e la sperimentazione con
+            giochi mobile. Utilizzo diversi strumenti di intelligenza artificiale e agenti AI per
+            supportare analisi, sviluppo e prototipazione.
           </p>
         </div>
         <div class="card">
           <h3>Il mio approccio</h3>
-          <p>✓ Interfacce intuitive e responsive</p>
-          <p>✓ Componenti riutilizzabili</p>
-          <p>✓ Integrazione con servizi backend</p>
-          <p>✓ Apprendimento continuo</p>
+          <ul class="approach-list">
+            <li>Interfacce comprensibili e responsive.</li>
+            <li>Componenti riutilizzabili e codice leggibile.</li>
+            <li>Collaborazione tra front-end e backend.</li>
+            <li>Analisi dei problemi e apprendimento continuo.</li>
+          </ul>
         </div>
       </section>
       <section class="section wrap reveal" id="contatti">
         <div class="contact">
           <div class="kicker">CONTATTI</div>
-          <h2>Parliamo del tuo progetto</h2>
-          <p>Hai un'idea o una proposta di collaborazione? Contattami.</p>
+          <h2>Parliamo della prossima opportunità</h2>
+          <p>
+            Cerchi un Front-End Developer Angular per il tuo team o vuoi realizzare un sito web?
+            Scrivimi per parlare di lavoro dipendente, collaborazioni e nuovi progetti web.
+          </p>
           <div class="contact-tools">
             <div class="contact-mail">
               <span>Email professionale</span><strong id="email-address">fraraci82@gmail.com</strong
@@ -576,7 +697,7 @@
                 placeholder="nome@esempio.it"
                 required=""
                 type="email"
-              /><label for="sender-message">Descrivi il progetto o la collaborazione</label
+              /><label for="sender-message">Descrivi l'opportunità o il progetto</label
               ><textarea
                 id="sender-message"
                 maxlength="3000"
@@ -584,11 +705,22 @@
                 placeholder="Di cosa hai bisogno?"
                 required=""
                 rows="4"
-              ></textarea
-              ><button class="btn main" type="submit">✉ Prepara il messaggio</button>
+              ></textarea>
+              <div class="consent-row">
+                <input
+                  id="privacy-consent"
+                  name="privacy-consent"
+                  required=""
+                  type="checkbox"
+                /><label for="privacy-consent">
+                  Ho letto l'<a href="./privacy.html">informativa privacy</a> e acconsento al
+                  trattamento dei dati per ricevere risposta alla mia richiesta.
+                </label>
+              </div>
+              <button class="btn main" type="submit">✉ Prepara il messaggio</button>
               <p class="form-note">
-                Si aprirà la tua app email con il messaggio già compilato. Nessun dato viene inviato
-                dal sito.
+                Scegli se aprire il messaggio nella tua app email, in Gmail o in Outlook, oppure
+                copiarlo. L'invio va confermato nella tua posta.
               </p>
             </form>
           </div>
@@ -609,8 +741,46 @@
           </div>
         </div>
       </section>
+      <dialog
+        class="project-dialog email-dialog"
+        id="email-dialog"
+        aria-labelledby="email-dialog-title"
+        aria-describedby="email-dialog-description"
+      >
+        <button class="dialog-close" type="button" aria-label="Chiudi opzioni email">×</button>
+        <h2 id="email-dialog-title">Come vuoi scrivermi?</h2>
+        <p id="email-dialog-description">
+          Scegli la tua posta oppure copia il testo e incollalo dove preferisci.
+        </p>
+        <p class="email-recipient">Scrivi a <strong>Francesco Raciti</strong></p>
+        <div class="email-options">
+          <a class="btn main" id="email-gmail" target="_blank" rel="noopener noreferrer"
+            >Apri Gmail ↗</a
+          >
+          <a class="btn" id="email-outlook" target="_blank" rel="noopener noreferrer"
+            >Apri Outlook ↗</a
+          >
+          <a class="btn" id="email-app" data-email-app>Apri l'app email</a>
+          <button class="btn" id="copy-email-message" type="button">Copia indirizzo email</button>
+        </div>
+        <p class="email-help">
+          Se l'app non si apre, scegli Gmail o Outlook. Puoi anche copiare il messaggio per usarlo
+          in un'altra casella di posta.
+        </p>
+        <details id="email-preview-details">
+          <summary>Visualizza il testo da copiare</summary>
+          <label class="email-preview-label" for="email-preview">Testo da copiare</label>
+          <textarea id="email-preview" readonly rows="7" spellcheck="false"></textarea>
+        </details>
+        <p id="email-copy-status" class="email-copy-status" role="status"></p>
+      </dialog>
     </main>
-    <footer><div class="wrap">© 2026 Francesco Raciti · Front-End Developer · Padova</div></footer>
+    <footer>
+      <div class="wrap">
+        © 2026 Francesco Raciti · Front-End Developer · Padova ·
+        <a href="./privacy.html">Privacy policy</a>
+      </div>
+    </footer>
 
     <script type="module" src="./js/main.js"></script>
   </body>

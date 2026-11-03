@@ -22,7 +22,7 @@ createServer(async (request, response) => {
     const relative = pathname === '/' ? 'index.html' : pathname.slice(1);
     const file = resolve(root, relative);
     const allowed =
-      ['index.html', 'robots.txt', 'sitemap.xml'].includes(relative) ||
+      ['index.html', 'privacy.html', 'robots.txt', 'sitemap.xml'].includes(relative) ||
       /^(assets|css|js)\//.test(relative);
     if (!allowed || !file.startsWith(root + sep)) {
       response.writeHead(404).end('Not found');

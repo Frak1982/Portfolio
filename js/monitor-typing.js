@@ -61,7 +61,7 @@ if (scene) {
         'export const francesco = {',
         '  role: "Front-End Dev",',
         '  location: "Padova",',
-        '  experience: "4+ years",',
+        '  developingSince: 2022,',
         '  stack: [',
         '    "Angular",',
         '    "TypeScript",',

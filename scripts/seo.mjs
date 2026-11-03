@@ -110,7 +110,7 @@ export function buildSeo(config) {
     head: head.join('\n'),
     robots: `User-agent: *\nAllow: /\n${siteUrl ? '\nSitemap: ' + new URL('sitemap.xml', siteUrl).href + '\n' : ''}`,
     sitemap: siteUrl
-      ? `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${escape(siteUrl)}</loc></url>\n</urlset>\n`
+      ? `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${escape(siteUrl)}</loc></url>\n  <url><loc>${escape(new URL('privacy.html', siteUrl).href)}</loc></url>\n</urlset>\n`
       : null,
   };
 }

@@ -16,11 +16,12 @@ Apri <http://127.0.0.1:4173>. Il server di sviluppo serve solo i file pubblici d
 ## Struttura
 
 - `index.html`: contenuti, sezioni e template dei dettagli dei progetti.
+- `privacy.html`: informativa sul trattamento dei dati del modulo di contatto.
 - `css/style.css`: layout, componenti, animazioni e breakpoint.
 - `js/main.js`: punto di ingresso dei moduli.
 - `js/animation-state.js`: sospende gli effetti fuori schermo, nelle schede nascoste e con movimento ridotto.
 - `js/scene-layout.js`: allinea gli elementi decorativi al ritaglio responsive della hero.
-- `js/contact.js`: copia email e preparazione del messaggio nell'app email.
+- `js/contact.js`: scelta tra app email, Gmail, Outlook e copia del messaggio, con alternativa manuale se gli appunti non sono disponibili.
 - `assets/`: CV, immagini e icone locali.
 - `tests/`: verifiche del browser per risorse, responsive, dialog, movimento ridotto e sito senza JavaScript.
 
@@ -38,7 +39,7 @@ Per cambiare i progetti, modifica le schede e i rispettivi `<template>` in `inde
 
 I valori `--scene-x` e `--scene-y` nel CSS controllano il ritaglio della hero. Le coordinate dei bagliori e degli editor fanno riferimento all'immagine da 1122 × 720 pixel e vanno aggiornate se cambia la fotografia.
 
-Le sezioni restano leggibili senza JavaScript. I controlli che lo richiedono vengono mostrati solo dopo l'inizializzazione. Il form non invia dati a un server: apre il programma email dell'utente, che deve confermare l'invio.
+Le sezioni restano leggibili senza JavaScript. I controlli che lo richiedono vengono mostrati solo dopo l'inizializzazione. Il form richiede il consenso all'informativa privacy e prepara il messaggio nel browser: l'utente sceglie se aprirlo nell'app email del dispositivo, in Gmail o in Outlook, oppure copiarlo. L'invio va confermato nella propria posta. Aprire una webmail trasmette al servizio scelto i dati necessari alla bozza; il sito non li invia a un proprio server. L'indirizzo e il collegamento email restano disponibili anche senza JavaScript.
 
 ## Pubblicazione
 
