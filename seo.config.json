@@ -1,0 +1,14 @@
+{
+  "siteUrl": "https://frak1982.github.io/Portfolio/",
+  "title": "Francesco Raciti | Sviluppatore Angular e Front-End a Padova",
+  "description": "Francesco Raciti, sviluppatore front-end a Padova. Applicazioni web con Angular, TypeScript e RxJS. Scopri progetti, competenze e CV e contattami per collaborare.",
+  "name": "Francesco Raciti",
+  "jobTitle": "Front-End Developer",
+  "locality": "Padova",
+  "language": "it-IT",
+  "sameAs": ["https://www.linkedin.com/in/francescoraciti"],
+  "knowsAbout": ["Angular", "TypeScript", "RxJS", "Signals", "HTML", "CSS", "API REST"],
+  "socialImage": "assets/hero-developer.webp",
+  "socialImageAlt": "Illustrazione della postazione di sviluppo del portfolio di Francesco Raciti",
+  "googleSiteVerification": null
+}

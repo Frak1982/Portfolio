@@ -1,57 +1,169 @@
+import { observeAnimationState } from './animation-state.js';
+import { observeSceneLayout } from './scene-layout.js';
+const scene = document.querySelector('.visual');
+if (scene) {
+  const configs = [
+    {
+      x: 685,
+      y: 251,
+      w: 88,
+      h: 175,
+      font: 7.7,
+      title: 'app.component.ts',
+      lines: [
+        'import { signal }',
+        ' from "@angular/core";',
+        '',
+        'export class App {',
+        ' name = signal("FR");',
+        ' projects = signal([]);',
+        '',
+        ' load() {',
+        '  this.api.getAll()',
+        '   .subscribe(data =>',
+        '    this.projects.set(data)',
+        '   );',
+        ' }',
+        '}',
+      ],
+    },
+    {
+      x: 990,
+      y: 177,
+      w: 129,
+      h: 148,
+      font: 7.5,
+      title: 'portfolio.service.ts',
+      lines: [
+        'import { inject }',
+        ' from "@angular/core";',
+        '',
+        'export class Service {',
+        ' http = inject(Http);',
+        '',
+        ' getProjects() {',
+        '  return this.http.get(',
+        '   "/api/projects"',
+        '  );',
+        ' }',
+        '}',
+      ],
+    },
+    {
+      x: 805,
+      y: 47,
+      w: 228,
+      h: 280,
+      font: 10.2,
+      title: 'francesco.skills.ts',
+      skills: true,
+      lines: [
+        'export const francesco = {',
+        '  role: "Front-End Dev",',
+        '  location: "Padova",',
+        '  experience: "4+ years",',
+        '  stack: [',
+        '    "Angular",',
+        '    "TypeScript",',
+        '    "RxJS",',
+        '    "Signals",',
+        '    "Responsive Design",',
+        '    "AI Tools"',
+        '  ],',
+        '  passion: "Build & Learn"',
+        '};',
+      ],
+    },
+  ];
 
-(()=>{
- const scene=document.querySelector('.visual');if(!scene)return;
- const W=1122,H=720;
- // Monitor sinistro: fascia di editor non coperta dalla scheda Angular.
- // Monitor destro: area interna a destra della scheda Angular.
- const configs=[
-  {x:685,y:251,w:88,h:175,font:7.7,title:'app.component.ts',lines:[
-   'import { signal }',' from "@angular/core";','','export class App {',' name = signal("FR");',' projects = signal([]);','',' load() {','  this.api.getAll()','   .subscribe(data =>','    this.projects.set(data)','   );',' }','}'
-  ]},
-  {x:990,y:177,w:129,h:148,font:7.5,title:'portfolio.service.ts',lines:[
-   'import { inject }',' from "@angular/core";','','export class Service {',' http = inject(Http);','',' getProjects() {','  return this.http.get(','   "/api/projects"','  );',' }','}'
-  ]},
-  {x:805,y:47,w:228,h:280,font:10.2,title:'francesco.skills.ts',skills:true,lines:[
-   'export const francesco = {',
-   '  role: "Front-End Dev",',
-   '  location: "Padova",',
-   '  experience: "4+ years",',
-   '  stack: [',
-   '    "Angular",',
-   '    "TypeScript",',
-   '    "RxJS",',
-   '    "Signals",',
-   '    "Responsive Design",',
-   '    "AI Tools"',
-   '  ],',
-   '  passion: "Build & Learn"',
-   '};'
-  ]}
- ];
- const panels=configs.map(c=>{let e=document.createElement('div');e.className='monitor-typing';e.setAttribute('aria-hidden','true');e.innerHTML='<div class="editor-top"></div><div class="editor-body"></div>';e.querySelector('.editor-top').textContent='●  '+c.title;if(c.skills)e.classList.add('skills-editor');scene.append(e);return e});
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- function align(){const w=scene.clientWidth,h=scene.clientHeight;if(!w||!h)return;
-  const scale=Math.max(w/W,h/H),iw=W*scale,ih=H*scale;
-  const small=matchMedia('(max-width:580px)').matches,mobile=matchMedia('(max-width:950px)').matches;
-  const posX=small?.49:.5,posY=mobile?(small?.5:.42):.4;
-  panels.forEach((e,i)=>{let c=configs[i],x=(w-iw)*posX+c.x*scale,y=(h-ih)*posY+c.y*scale;
-   e.style.left=x+'px';e.style.top=y+'px';e.style.width=c.w*scale+'px';e.style.height=c.h*scale+'px';
-   e.style.fontSize=c.font*scale+'px';e.style.borderRadius=2*scale+'px';
-   e.querySelector('.editor-top').style.height=13*scale+'px';e.querySelector('.editor-top').style.lineHeight=13*scale+'px';e.querySelector('.editor-top').style.fontSize=7*scale+'px';
-   e.querySelector('.editor-body').style.height='calc(100% - '+13*scale+'px)';
-   e.style.display=(x+c.w*scale<0||x>w||y+c.h*scale<0||y>h)?'none':'block';
+  const panels = configs.map((config) => {
+    const element = document.createElement('div');
+    element.className = 'monitor-typing' + (config.skills ? ' skills-editor' : '');
+    element.setAttribute('aria-hidden', 'true');
+    const top = document.createElement('div');
+    top.className = 'editor-top';
+    top.textContent = '●  ' + config.title;
+    const body = document.createElement('div');
+    body.className = 'editor-body';
+    element.append(top, body);
+    scene.append(element);
+    return { element, body, config, text: config.lines.join('\n'), last: -1 };
   });
- }
- new ResizeObserver(align).observe(scene);align();
- const escape=t=>t.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
- const color=t=>escape(t).replace(/\b(import|from|export|class|const|return|signal|inject)\b/g,'<span class="kw">$1</span>').replace(/\b(subscribe|getAll|getProjects|set|load)\b/g,'<span class="fn">$1</span>');
- const total=c=>c.lines.reduce((a,l)=>a+l.length+1,0);
- let last=[-1,-1,-1];
- function tick(now){panels.forEach((e,i)=>{const c=configs[i],max=total(c),cycle=14000,elapsed=(now+i*3400)%cycle;
-  const n=reduced.matches?max:elapsed<(c.skills?15500:10500)?Math.min(max,Math.floor(elapsed/(c.skills?46:44))):elapsed<(c.skills?18000:12500)?max:0;
-  if(n===last[i])return;last[i]=n;let left=n,parts=[];
-  for(let j=0;j<c.lines.length&&left>0;j++){let l=c.lines[j],t=l.slice(0,left);parts.push('<span class="line">'+color(t)+'</span>');left-=l.length+1}
-  if(!reduced.matches&&elapsed<(c.skills?18000:12500))parts.push('<span class="caret"></span>');
-  e.querySelector('.editor-body').innerHTML=parts.join('');
- });requestAnimationFrame(tick)}requestAnimationFrame(tick);
-})();
+  observeSceneLayout(
+    scene,
+    panels.map(({ element, config }) => ({
+      element,
+      x: config.x,
+      y: config.y,
+      width: config.w,
+      height: config.h,
+      font: config.font,
+    })),
+  );
+
+  function render(panel, count, caret) {
+    if (panel.last === count + ':' + caret) return;
+    panel.last = count + ':' + caret;
+    const fragment = document.createDocumentFragment();
+    for (const text of panel.text.slice(0, count).split('\n')) {
+      const line = document.createElement('span');
+      line.className = 'line';
+      // Tokenize plain text; never insert generated HTML.
+      const tokens = text.split(
+        /(\b(?:import|from|export|class|const|return|signal|inject|subscribe|getAll|getProjects|set|load)\b)/g,
+      );
+      for (const token of tokens) {
+        if (/^(import|from|export|class|const|return|signal|inject)$/.test(token)) {
+          const keyword = document.createElement('span');
+          keyword.className = 'kw';
+          keyword.textContent = token;
+          line.append(keyword);
+        } else if (/^(subscribe|getAll|getProjects|set|load)$/.test(token)) {
+          const fn = document.createElement('span');
+          fn.className = 'fn';
+          fn.textContent = token;
+          line.append(fn);
+        } else {
+          line.append(document.createTextNode(token));
+        }
+      }
+      fragment.append(line);
+    }
+    if (caret) {
+      const cursor = document.createElement('span');
+      cursor.className = 'caret';
+      fragment.append(cursor);
+    }
+    panel.body.replaceChildren(fragment);
+  }
+
+  let frame = 0;
+  let startedAt = null;
+  function tick(now) {
+    if (startedAt === null) startedAt = now;
+    panels.forEach((panel, index) => {
+      const typingDuration = panel.text.length * 46;
+      const holdDuration = 2000;
+      const cycle = typingDuration + holdDuration + 1500;
+      const elapsed = (now - startedAt + index * 3400) % cycle;
+      const count =
+        elapsed < typingDuration
+          ? Math.floor(elapsed / 46)
+          : elapsed < typingDuration + holdDuration
+            ? panel.text.length
+            : 0;
+      render(panel, count, elapsed < typingDuration);
+    });
+    frame = requestAnimationFrame(tick);
+  }
+  observeAnimationState(scene, (active) => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    if (active) {
+      startedAt = null;
+      frame = requestAnimationFrame(tick);
+    } else {
+      panels.forEach((panel) => render(panel, panel.text.length, false));
+    }
+  });
+}

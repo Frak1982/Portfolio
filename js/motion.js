@@ -1,14 +1,64 @@
+import { observeAnimationState } from './animation-state.js';
 
-(()=>{
-const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-const targets=document.querySelectorAll('.project-card,.skill,.about .card,.contact,.section > h2');
-if(!reduced.matches && 'IntersectionObserver' in window){
-const observer=new IntersectionObserver((entries)=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('motion-in');observer.unobserve(entry.target)}}),{threshold:.08,rootMargin:'0px 0px 40px 0px'});
-targets.forEach(el=>{el.classList.add('motion-reveal');observer.observe(el)});
+const preference = matchMedia('(prefers-reduced-motion: reduce)');
+const animations = new Set();
+// Content is visible by default. Entrance effects are an optional enhancement.
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        if (preference.matches || !entry.target.animate) continue;
+        const animation = entry.target.animate(
+          [
+            { opacity: 0, transform: 'translateY(18px)' },
+            { opacity: 1, transform: 'none' },
+          ],
+          { duration: 700, easing: 'ease-out' },
+        );
+        animations.add(animation);
+        animation.finished.finally(() => animations.delete(animation)).catch(() => {});
+      }
+    },
+    { threshold: 0.08 },
+  );
+  document.querySelectorAll('.reveal').forEach((target) => observer.observe(target));
 }
-const hero=document.querySelector('.hero');
-if(hero && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced.matches){
-let pending=false,x=50,y=40;
-hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();x=(e.clientX-r.left)/r.width*100;y=(e.clientY-r.top)/r.height*100;if(!pending){pending=true;requestAnimationFrame(()=>{hero.style.setProperty('--pointer-x',x+'%');hero.style.setProperty('--pointer-y',y+'%');pending=false})}},{passive:true});
+preference.addEventListener('change', () => {
+  if (preference.matches) animations.forEach((animation) => animation.cancel());
+});
+const hero = document.querySelector('.hero');
+if (hero && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  let frame = 0;
+  hero.addEventListener(
+    'pointermove',
+    (event) => {
+      if (preference.matches || frame) return;
+      frame = requestAnimationFrame(() => {
+        const bounds = hero.getBoundingClientRect();
+        hero.style.setProperty(
+          '--pointer-x',
+          ((event.clientX - bounds.left) / bounds.width) * 100 + '%',
+        );
+        hero.style.setProperty(
+          '--pointer-y',
+          ((event.clientY - bounds.top) / bounds.height) * 100 + '%',
+        );
+        frame = 0;
+      });
+    },
+    { passive: true },
+  );
 }
-})();
+
+const preview = document.querySelector('.creative-demo');
+if (preview) {
+  observeAnimationState(preview.closest('.project-art'), (active) => {
+    if (active) preview.unpauseAnimations?.();
+    else {
+      preview.pauseAnimations?.();
+      preview.setCurrentTime?.(0);
+    }
+  });
+}

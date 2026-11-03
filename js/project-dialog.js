@@ -1,1 +1,32 @@
-(()=>{const d=document.getElementById('project-dialog');if(!d||!d.showModal)return;const data={triskele:{label:'PROGETTO PUBBLICATO',title:'Triskele Gastronomie',body:'<p>Sito web realizzato con <strong>Angular</strong>, con utilizzo di strumenti AI a supporto dello sviluppo.</p><p>Un esempio concreto di progetto web pubblicato.</p><p><a href="https://triskelegastronomie.com" target="_blank" rel="noopener noreferrer">Apri il sito online ↗</a></p>'},puzzle:{label:'PROTOTIPO IN SVILUPPO',title:'CreativePuzzle',body:'<p>Puzzle game mobile sviluppato con <strong>Unity 6 e C#</strong>.</p><ul><li>Obiettivo: guidare una pallina dal punto iniziale al portale.</li><li>Posizionamento di rampe e altri elementi all’interno di una cornice sospesa nel vuoto.</li><li>Simulazione fisica, reset e verifica del completamento del livello.</li><li>Il progetto è ancora in fase di prototipazione; non è disponibile una demo pubblica.</li></ul>'}};document.querySelectorAll('.detail-btn').forEach(b=>b.addEventListener('click',()=>{const x=data[b.dataset.project];if(!x)return;document.getElementById('dialog-kicker').textContent=x.label;document.getElementById('dialog-title').textContent=x.title;document.getElementById('dialog-body').innerHTML=x.body;d.showModal()}));d.querySelector('.dialog-close').addEventListener('click',()=>d.close());d.addEventListener('click',e=>{if(e.target===d)d.close()})})();
+const dialog = document.getElementById('project-dialog');
+if (dialog && typeof dialog.showModal === 'function') {
+  const content = document.getElementById('dialog-content');
+  for (const button of document.querySelectorAll('[data-project]')) {
+    const template = document.getElementById('project-' + button.dataset.project);
+    if (!(template instanceof HTMLTemplateElement)) continue;
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      content.replaceChildren(template.content.cloneNode(true));
+      dialog.showModal();
+    });
+  }
+  dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+  // Only the backdrop closes the dialog; clicking its inner padding must not.
+  let pointerStartedOutside = false;
+  const outside = (event) => {
+    const bounds = dialog.getBoundingClientRect();
+    return (
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom
+    );
+  };
+  dialog.addEventListener('pointerdown', (event) => {
+    pointerStartedOutside = outside(event);
+  });
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog && pointerStartedOutside && outside(event)) dialog.close();
+    pointerStartedOutside = false;
+  });
+}
