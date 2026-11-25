@@ -426,130 +426,33 @@
             </div>
           </article>
           <article class="project-card">
-            <div aria-hidden="true" class="project-art art-puzzle creative-motion">
-              <svg
-                class="creative-demo"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 360 195"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient id="cp-ramp" x2="1" y2="1">
-                    <stop stop-color="#25d5ff"></stop>
-                    <stop offset="1" stop-color="#886bff"></stop>
-                  </linearGradient>
-                  <radialGradient id="cp-ball">
-                    <stop stop-color="#fff"></stop>
-                    <stop offset=".65" stop-color="#a8ecff"></stop>
-                    <stop offset="1" stop-color="#29a5fa"></stop>
-                  </radialGradient>
-                  <filter id="cp-glow"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter>
-                </defs>
-                <rect
-                  fill="#08172c"
-                  height="168"
-                  rx="13"
-                  stroke="#3e8ac5"
-                  stroke-width="2"
-                  width="330"
-                  x="15"
-                  y="12"
-                ></rect>
-                <path
-                  d="M18 43H342 M18 75H342 M18 107H342 M18 139H342 M52 15V178 M85 15V178 M118 15V178 M151 15V178 M184 15V178 M217 15V178 M250 15V178 M283 15V178 M316 15V178"
-                  opacity=".14"
-                  stroke="#356089"
-                ></path>
-                <rect
-                  fill="#2b689f"
-                  height="12"
-                  rx="5"
-                  stroke="#5bd7ff"
-                  width="56"
-                  x="35"
-                  y="38"
-                ></rect>
-                <text fill="white" font-size="8" text-anchor="middle" x="63" y="49">START</text>
-                <rect fill="#245582" height="9" rx="3" width="51" x="44" y="58"></rect>
-                <g class="cp-ramp">
-                  <path
-                    d="M108 72 L178 100"
-                    filter="url(#cp-glow)"
-                    opacity=".18"
-                    stroke="#29d5ff"
-                    stroke-linecap="round"
-                    stroke-width="13"
-                  ></path>
-                  <path
-                    d="M108 72 L178 100"
-                    stroke="url(#cp-ramp)"
-                    stroke-linecap="round"
-                    stroke-width="9"
-                  ></path>
-                </g>
-                <g class="cp-middle-ramp">
-                  <path
-                    d="M202 121 L244 139"
-                    stroke="#9d65ff"
-                    stroke-linecap="round"
-                    stroke-width="9"
-                  ></path>
-                </g>
-                <g class="cp-platform">
-                  <path
-                    d="M263 155 L282 161"
-                    stroke="#63b9ff"
-                    stroke-linecap="round"
-                    stroke-width="9"
-                  ></path>
-                </g>
-                <g class="cp-portal">
-                  <ellipse
-                    cx="306"
-                    cy="158"
-                    fill="#8e5cff"
-                    filter="url(#cp-glow)"
-                    opacity=".23"
-                    rx="19"
-                    ry="21"
-                  ></ellipse>
-                  <ellipse
-                    cx="306"
-                    cy="158"
-                    fill="#211344"
-                    rx="16"
-                    ry="19"
-                    stroke="#b68cff"
-                    stroke-width="5"
-                  ></ellipse>
-                  <ellipse cx="306" cy="158" fill="#8c5aff" opacity=".45" rx="9" ry="13"></ellipse>
-                </g>
-                <g class="cp-ball" transform="translate(68 30)">
-                  <circle fill="#2bceff" filter="url(#cp-glow)" opacity=".6" r="10"></circle>
-                  <circle fill="url(#cp-ball)" r="7"></circle>
-                  <animateMotion
-                    calcMode="linear"
-                    dur="5.5s"
-                    keyPoints="0;0.08;0.22;0.44;0.57;0.72;0.83;0.92;1;1"
-                    keyTimes="0;0.14;0.28;0.44;0.54;0.66;0.75;0.83;0.91;1"
-                    path="M0 0 L22 0 Q32 0 40 30 L110 58 Q124 64 134 79 L176 97 Q187 102 195 113 L214 119 Q226 123 238 128"
-                    repeatCount="indefinite"
-                  ></animateMotion>
-                </g>
-              </svg>
+            <div class="project-art art-roll-build">
+              <img
+                class="project-preview"
+                src="./assets/roll-and-build/images/web/01-cover.webp"
+                width="1920"
+                height="1080"
+                loading="lazy"
+                decoding="async"
+                alt="Locandina di Roll &amp; Build con una schermata reale del gioco tra isole sospese e portali"
+              />
             </div>
             <div class="project-body">
               <div class="project-meta">
                 <span class="tag">Unity 6</span><span class="tag">C#</span>
-                <span class="tag">AI-assisted</span
-                ><span class="status building">● In sviluppo</span>
+                <span class="tag">Android</span><span class="tag">AI-assisted</span>
+                <span class="status live">● Completato</span>
               </div>
-              <h3>CreativePuzzle</h3>
+              <h3>Roll &amp; Build</h3>
               <p>
-                Gioco puzzle mobile: posiziona rampe e blocchi per guidare una pallina fino al
-                traguardo.
+                Puzzle mobile per Android con 12 livelli e ambienti zen. Costruisci il percorso
+                della sfera scegliendo tra rampe, rimbalzi, magneti e portali: ogni soluzione nasce
+                dalla fisica.
               </p>
               <div class="project-actions">
+                <a class="btn main" href="./assets/roll-and-build/index.html"
+                  >Guarda immagini e video</a
+                >
                 <button type="button" hidden class="btn detail-btn" data-project="puzzle">
                   Scopri il progetto
                 </button>
@@ -618,29 +521,45 @@
           >
         </p>
       </template>
-      <template id="project-puzzle"
-        ><div class="kicker">PROTOTIPO IN SVILUPPO</div>
-        <h2 id="dialog-title">CreativePuzzle</h2>
+      <template id="project-puzzle">
+        <div class="kicker">PROGETTO COMPLETATO</div>
+        <h2 id="dialog-title">Roll &amp; Build</h2>
+        <img
+          class="project-detail-image"
+          src="./assets/roll-and-build/images/web/06-moonlit-combination.webp"
+          width="1920"
+          height="1080"
+          alt="Gameplay reale di Roll &amp; Build: sfera infuocata, nastri, bilanciere e portali in un paesaggio lunare"
+        />
         <p>
-          <strong>CreativePuzzle</strong> è un gioco puzzle per dispositivi mobili in cui il
-          giocatore costruisce un percorso per guidare una pallina fino al portale di arrivo.
+          <strong>Roll &amp; Build</strong> è un puzzle game per Android realizzato con Unity e C#.
+          Il giocatore sceglie un numero limitato di strumenti, li posiziona e li ruota per guidare
+          una sfera fino al traguardo attraverso la fisica.
         </p>
-        <p>
-          La sfida consiste nello scegliere dove posizionare rampe e blocchi prima di avviare il
-          movimento: ogni disposizione cambia il percorso della pallina e permette di sperimentare
-          soluzioni diverse.
-        </p>
+        <h3>Il gioco realizzato</h3>
         <ul>
-          <li>Obiettivo: guidare una pallina dal punto iniziale al portale.</li>
+          <li>12 livelli con ambienti zen e percorsi differenti.</li>
           <li>
-            Posizionamento di rampe e altri elementi all’interno di una cornice sospesa nel vuoto.
+            11 tipologie di pezzi: rampe, piattaforme elastiche, ventole, magneti, nastri, freni,
+            bilancieri e portali direzionali.
           </li>
-          <li>Possibilità di riprovare il livello e modificare la disposizione degli elementi.</li>
+          <li>Personalizzazione della sfera con colori ed effetti elementali.</li>
           <li>
-            Il progetto è ancora in fase di prototipazione; non è disponibile una demo pubblica.
+            Suoni e feedback tattile associati alle interazioni, impostazioni e interfaccia in
+            italiano e inglese.
           </li>
-        </ul></template
-      >
+        </ul>
+        <p>
+          Un progetto completato e giocabile su Android, che unisce logica, sperimentazione e
+          un'atmosfera rilassante. La presentazione raccoglie immagini del gioco e un video di
+          gameplay reale.
+        </p>
+        <p>
+          <a href="./assets/roll-and-build/index.html"
+            >Guarda le immagini e il video di Roll &amp; Build →</a
+          >
+        </p>
+      </template>
       <section class="section wrap about reveal" id="chi-sono">
         <div>
           <div class="kicker">CHI SONO</div>

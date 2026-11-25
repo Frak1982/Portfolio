@@ -445,6 +445,24 @@ button:focus-visible {
   justify-content: center;
   overflow: hidden;
 }
+.art-roll-build {
+  background: #081e18;
+}
+.art-roll-build::after {
+  content: none;
+}
+.art-roll-build .project-preview {
+  object-fit: contain;
+  object-position: center;
+}
+.project-detail-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  margin: 18px 0;
+}
 .art-puzzle {
   background: radial-gradient(ellipse at center, #143c64, #070d24 70%);
 }

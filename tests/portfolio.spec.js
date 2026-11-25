@@ -83,7 +83,7 @@ test('project dialog supports keyboard, focus restoration and safe padding click
   await expect(dialog).not.toBeVisible();
   await expect(trigger).toBeFocused();
   await page.locator('[data-project="puzzle"]').click();
-  await expect(dialog.getByRole('heading', { name: 'CreativePuzzle' })).toBeVisible();
+  await expect(dialog.getByRole('heading', { name: 'Roll & Build' })).toBeVisible();
   await dialog.getByRole('button', { name: 'Chiudi finestra' }).click();
   await expect(dialog).not.toBeVisible();
 });
@@ -176,33 +176,51 @@ test('decorative animation pauses offscreen and reacts to motion preference chan
   await expect(page.locator('.monitor-typing').first()).toContainText('export class App');
 });
 
-test('puzzle preview rolls downhill and finishes at the portal', async ({ page }) => {
+test('completed game links to real images and a seekable showcase video', async ({ page }) => {
   await page.goto('/');
-  const geometry = await page.locator('.creative-demo').evaluate((svg) => {
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', svg.querySelector('animateMotion').getAttribute('path'));
-    const length = path.getTotalLength();
-    let previous = path.getPointAtLength(0);
-    let downhill = true;
-    for (let step = 1; step <= 200; step++) {
-      const point = path.getPointAtLength((length * step) / 200);
-      if (point.y < previous.y - 0.01 || point.x < previous.x - 0.01) downhill = false;
-      previous = point;
-    }
-    const ramps = [
-      ...svg.querySelectorAll('.cp-ramp path, .cp-middle-ramp path, .cp-platform path'),
-    ];
-    const rampsDescend = ramps.every(
-      (ramp) => ramp.getPointAtLength(ramp.getTotalLength()).y > ramp.getPointAtLength(0).y,
+  const card = page
+    .locator('.project-card')
+    .filter({ has: page.getByRole('heading', { name: 'Roll & Build', exact: true }) });
+  await expect(card).toContainText('Completato');
+  const poster = card.getByRole('img');
+  await poster.scrollIntoViewIfNeeded();
+  await expect.poll(() => poster.evaluate((img) => img.naturalWidth)).toBe(1920);
+  await card.getByRole('link', { name: 'Guarda immagini e video' }).click();
+  await expect(page).toHaveURL(/assets\/roll-and-build\/index\.html$/);
+  const video = page.locator('video');
+  await expect(video).toHaveAttribute('controls', '');
+  await expect(video).toHaveAttribute('preload', 'metadata');
+  await expect
+    .poll(() =>
+      video.evaluate(
+        (v) => Number.isFinite(v.duration) && v.duration > 44 && v.videoWidth === 1920,
+      ),
+    )
+    .toBe(true);
+  const range = await page.request.get(
+    '/assets/roll-and-build/video/roll-and-build-showcase-1080p.mp4',
+    { headers: { Range: 'bytes=0-1023' } },
+  );
+  expect(range.status()).toBe(206);
+  expect(range.headers()['content-type']).toBe('video/mp4');
+  expect((await range.body()).length).toBe(1024);
+  await expect(page.locator('figure img')).toHaveCount(7);
+  for (const width of [320, 390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
     );
-    const origin = svg.querySelector('.cp-ball').transform.baseVal.consolidate().matrix;
-    const portal = svg.querySelector('.cp-portal ellipse');
-    const atPortal =
-      Math.hypot(
-        previous.x + origin.e - portal.cx.baseVal.value,
-        previous.y + origin.f - portal.cy.baseVal.value,
-      ) < 1;
-    return { downhill, rampsDescend, atPortal };
-  });
-  expect(geometry).toEqual({ downhill: true, rampsDescend: true, atPortal: true });
+  }
+  await page.getByRole('link', { name: 'Torna ai progetti' }).click();
+  await expect(page.locator('#progetti')).toBeInViewport();
+});
+
+test('game media remains reachable without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto('http://127.0.0.1:4173/');
+  await page.getByRole('link', { name: 'Guarda immagini e video' }).click();
+  await expect(page.locator('video')).toBeVisible();
+  await expect(page.locator('figure img')).toHaveCount(7);
+  await context.close();
 });
