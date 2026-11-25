@@ -176,35 +176,47 @@ test('decorative animation pauses offscreen and reacts to motion preference chan
   await expect(page.locator('.monitor-typing').first()).toContainText('export class App');
 });
 
-test('completed game links to real images and a seekable showcase video', async ({ page }) => {
+test('completed game links to a short Italian video without walkthrough images or download links', async ({
+  page,
+}) => {
   await page.goto('/');
   const card = page
     .locator('.project-card')
     .filter({ has: page.getByRole('heading', { name: 'Roll & Build', exact: true }) });
   await expect(card).toContainText('Completato');
+  await expect(card.locator('p')).toHaveCount(0);
   const poster = card.getByRole('img');
   await poster.scrollIntoViewIfNeeded();
   await expect.poll(() => poster.evaluate((img) => img.naturalWidth)).toBe(1920);
-  await card.getByRole('link', { name: 'Guarda immagini e video' }).click();
+  await card.getByRole('link', { name: 'Guarda il video' }).click();
   await expect(page).toHaveURL(/assets\/roll-and-build\/index\.html$/);
   const video = page.locator('video');
   await expect(video).toHaveAttribute('controls', '');
   await expect(video).toHaveAttribute('preload', 'metadata');
+  await expect(video).toHaveAttribute('controlslist', 'nodownload');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'it');
+  await expect(page.locator('a[download], a[href$=".mp4"], a[href$=".txt"]')).toHaveCount(0);
+  await expect(page.locator('main a')).toHaveCount(1);
+
   await expect
     .poll(() =>
       video.evaluate(
-        (v) => Number.isFinite(v.duration) && v.duration > 44 && v.videoWidth === 1920,
+        (v) =>
+          Number.isFinite(v.duration) &&
+          v.duration >= 10 &&
+          v.duration < 13 &&
+          v.videoWidth === 1920,
       ),
     )
     .toBe(true);
   const range = await page.request.get(
-    '/assets/roll-and-build/video/roll-and-build-showcase-1080p.mp4',
+    '/assets/roll-and-build/video/roll-and-build-anteprima-it.mp4',
     { headers: { Range: 'bytes=0-1023' } },
   );
   expect(range.status()).toBe(206);
   expect(range.headers()['content-type']).toBe('video/mp4');
   expect((await range.body()).length).toBe(1024);
-  await expect(page.locator('figure img')).toHaveCount(7);
+  await expect(page.locator('figure img')).toHaveCount(0);
   for (const width of [320, 390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
@@ -219,8 +231,8 @@ test('game media remains reachable without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4173/');
-  await page.getByRole('link', { name: 'Guarda immagini e video' }).click();
+  await page.getByRole('link', { name: 'Guarda il video' }).click();
   await expect(page.locator('video')).toBeVisible();
-  await expect(page.locator('figure img')).toHaveCount(7);
+  await expect(page.locator('figure img')).toHaveCount(0);
   await context.close();
 });

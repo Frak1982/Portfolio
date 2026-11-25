@@ -1,7 +1,0 @@
-Roll & Build
-
-Roll & Build is a zen-inspired mobile physics puzzle game built with Unity for Android. Players choose, position and rotate a limited set of tools to guide a gravity-driven sphere to its goal.
-
-The current game features 12 puzzles set in distinct environments, 11 building-tool types, and customizable sphere colors and elemental effects. Ramps, elastic platforms, conveyors, a seesaw, fans, magnets and directional portals encourage different physical solutions.
-
-Material-specific sounds, spatial audio and tactile feedback connect each interaction to the journey of the sphere.
